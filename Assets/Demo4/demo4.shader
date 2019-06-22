@@ -1,4 +1,4 @@
-﻿Shader "Unlit/final"
+﻿Shader "Unlit/demo4"
 {
 	Properties
     {
@@ -46,8 +46,10 @@
 
             float _AnimLen;
             
-            float _From;
-            float _To;
+        UNITY_INSTANCING_BUFFER_START(Props)
+           UNITY_DEFINE_INSTANCED_PROP(float, _From)
+           UNITY_DEFINE_INSTANCED_PROP(float, _To)
+        UNITY_INSTANCING_BUFFER_END(Props)
 
             
             v2f vert (appdata v, uint vid : SV_VertexID)
@@ -58,7 +60,9 @@
 
                 f = fmod(f, 1.0);
                 
-                f = _From + f*(_To-_From);
+                float from = UNITY_ACCESS_INSTANCED_PROP(Props, _From);
+                float to = UNITY_ACCESS_INSTANCED_PROP(Props, _To);
+                f = from + f*(to-from);
 
                 float animMap_x = (vid + 0.5) * _AnimMap_TexelSize.x;
                 float animMap_y = f;
