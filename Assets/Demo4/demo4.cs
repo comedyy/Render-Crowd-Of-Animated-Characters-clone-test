@@ -33,9 +33,9 @@ public class demo4 : MonoBehaviour {
 		int length = _percents.Count - 1;
 		int count = 0;
 
-        for(int i = 0; i < length; i++)
+        for(int i = 0; i < gridWidth; i++)
         {
-            for(int j = 0; j < 1; j++)
+            for(int j = 0; j <gridHeight; j++)
             {
                 GameObject o = Instantiate<GameObject>(spawnPrefab, new Vector3(i * 2, 0, j * 2), Quaternion.identity);
 				MeshRenderer r =  o.GetComponent<MeshRenderer>();
